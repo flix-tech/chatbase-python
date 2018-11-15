@@ -133,11 +133,13 @@ class MessageSet(object):
                  api_key="",
                  platform="",
                  version="",
-                 user_id=""):
+                 user_id="",
+                 session_id=""):
         self.api_key = api_key
         self.platform = platform
         self.version = version
         self.user_id = user_id
+        self.session_id = session_id
         self.messages = []
 
     def append_message(self, message_object):
@@ -155,6 +157,7 @@ class MessageSet(object):
                                      platform=self.platform,
                                      version=self.version,
                                      user_id=self.user_id,
+                                     session_id=self.session_id,
                                      intent=intent,
                                      message=message,
                                      type=type,
