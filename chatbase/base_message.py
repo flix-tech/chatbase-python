@@ -115,12 +115,13 @@ class Message(object):
         """Return a JSON version for use with the Chatbase API"""
         return json.dumps(self, default=lambda i: i.__dict__)
 
-    def send(self):
+    def send(self, timeout=None):
         """Send the message to the Chatbase API."""
         url = "https://chatbase.com/api/message"
         return requests.post(url,
                              data=self.to_json(),
-                             headers=Message.get_content_type())
+                             headers=Message.get_content_type(),
+                             timeout=timeout)
 
 
 class MessageSet(object):
@@ -166,9 +167,10 @@ class MessageSet(object):
         return json.dumps({'messages': self.messages},
                           default=lambda i: i.__dict__)
 
-    def send(self):
+    def send(self, timeout=None):
         """Send the message set to the Chatbase API"""
         url = ("https://chatbase.com/api/messages?api_key=%s" % self.api_key)
         return requests.post(url,
                              data=self.to_json(),
-                             headers=Message.get_content_type())
+                             headers=Message.get_content_type(),
+                             timeout=timeout)
